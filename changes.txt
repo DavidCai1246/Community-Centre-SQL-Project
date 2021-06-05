@@ -7,3 +7,4 @@ Changes we made so far:
 - Add/Modify attributes (eg. contract_time to contract_start and contract_end in Contractor table)
 - add new attribute Food, timeAte to EmployeeEats and MemberEats relation
 - add NOT NULL constraint to some attributes
+- Remove location from primary key of Community_Centre, getting errors when declaring foreign keys
