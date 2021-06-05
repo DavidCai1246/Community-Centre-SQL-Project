@@ -1,0 +1,9 @@
+Changes we made so far:
+
+- Took the feedback from milestone 2, create a super class table Employee so that our eats and parks membership is more efficient
+- Change table names (eg. Volunteer_WorksIn to just Volunteer)
+- Remove guardian name attribute for Volunteer
+- Remove location attribute for Volunteer, Contractor, Staff
+- Add/Modify attributes (eg. contract_time to contract_start and contract_end in Contractor table)
+- add new attribute Food, timeAte to EmployeeEats and MemberEats relation
+- add NOT NULL constraint to some attributes
