@@ -6,5 +6,9 @@ Changes we made so far:
 - Remove location attribute for Volunteer, Contractor, Staff
 - Add/Modify attributes (eg. contract_time to contract_start and contract_end in Contractor table)
 - add new attribute Food, timeAte to EmployeeEats and MemberEats relation
+- add new attribute role to staff role
 - add NOT NULL constraint to some attributes
 - Remove location from primary key of Community_Centre, getting errors when declaring foreign keys
+- change the char length for some attributes
+- Removed the Parks relationship from ERD as assigning a parking number is equivalent
+- Add attributes name, age, address to member

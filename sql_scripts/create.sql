@@ -1,6 +1,6 @@
 CREATE TABLE Community_Centre(
-Name CHAR(20),
-Location CHAR(20),
+Name CHAR(50),
+Location CHAR(50),
 Open_Time Time,
 Close_Time Time,
 PRIMARY KEY(Name)
@@ -11,7 +11,7 @@ CREATE TABLE Parking_Stall(
 Parking_Num INTEGER,
 Duration Real DEFAULT 2.00,
 Type CHAR(20),
-Community_Centre CHAR(20),
+Community_Centre CHAR(50),
 PRIMARY KEY (Parking_Num),
 FOREIGN KEY (Community_Centre) REFERENCES Community_Centre(Name) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -19,7 +19,7 @@ FOREIGN KEY (Community_Centre) REFERENCES Community_Centre(Name) ON DELETE CASCA
 #Change from Equipment_Contains
 CREATE TABLE Equipment(
 Equipment_ID INTEGER,
-Community_Centre CHAR(20) NOT NULL,
+Community_Centre CHAR(50) NOT NULL,
 Type CHAR(20),
 In_Use Boolean DEFAULT FALSE,
 PRIMARY KEY (Equipment_ID),
@@ -29,6 +29,9 @@ FOREIGN KEY (Community_Centre) REFERENCES Community_Centre(Name) ON DELETE CASCA
 #Change from Memberships_Uses_Parks
 CREATE TABLE Memberships(
 Membership_ID INTEGER,
+Age INTEGER,
+Name CHAR(20),
+Address CHAR(30),
 Equipment_ID INTEGER,
 Parking_Num INTEGER,
 PRIMARY KEY (Membership_ID),
@@ -44,7 +47,7 @@ Name CHAR(20),
 Address CHAR(30),
 Hours INTEGER,
 Parking_Num INTEGER,
-Community_Centre CHAR(20),
+Community_Centre CHAR(50),
 PRIMARY KEY (Employee_ID),
 FOREIGN KEY (Parking_Num) REFERENCES Parking_Stall(Parking_Num) ON DELETE CASCADE,
 FOREIGN KEY (Community_Centre) REFERENCES Community_Centre(Name) ON DELETE CASCADE
@@ -53,7 +56,7 @@ FOREIGN KEY (Community_Centre) REFERENCES Community_Centre(Name) ON DELETE CASCA
 #Change from Volunteer_WorksIn
 CREATE TABLE Volunteer(
 Employee_ID INTEGER,
-School CHAR(20),
+School CHAR(50),
 PRIMARY KEY (Employee_ID),
 FOREIGN KEY (Employee_ID) REFERENCES Employee(Employee_ID) ON DELETE CASCADE
 );
@@ -61,6 +64,7 @@ FOREIGN KEY (Employee_ID) REFERENCES Employee(Employee_ID) ON DELETE CASCADE
 #Change from Staff_WorksIn
 CREATE TABLE Staff(
 Employee_ID INTEGER,
+Role CHAR(30),
 PRIMARY KEY(Employee_ID),
 FOREIGN KEY (Employee_ID) REFERENCES Employee(Employee_ID) ON DELETE CASCADE
 );
@@ -76,9 +80,9 @@ FOREIGN KEY (Employee_ID) REFERENCES Employee(Employee_ID) ON DELETE CASCADE
 
 #Change from Food_Services_Contains
 CREATE TABLE Food_Services(
-Food_Service_Name CHAR(20),
-Location CHAR(20),
-Community_Centre CHAR(20),
+Food_Service_Name CHAR(50),
+Location CHAR(50),
+Community_Centre CHAR(50),
 Food_Service_ID INTEGER,
 PRIMARY KEY(Food_Service_ID),
 FOREIGN KEY(Community_Centre) REFERENCES Community_Centre(Name) ON DELETE CASCADE
@@ -99,7 +103,7 @@ Membership_ID INTEGER,
 Food_Service_ID INTEGER,
 Food CHAR(30),
 TimeAte Date,
-PRIMARY KEY(Food_Service_ID, Membership_ID, TimeAte),
+PRIMARY KEY(Food_Service_ID, Membership_ID, Food, TimeAte),
 FOREIGN KEY(Membership_ID) REFERENCES Memberships(Membership_ID) ON DELETE CASCADE,
 FOREIGN KEY(Food_Service_ID) REFERENCES Food_Services(Food_Service_ID) ON DELETE CASCADE
 );
@@ -107,7 +111,7 @@ FOREIGN KEY(Food_Service_ID) REFERENCES Food_Services(Food_Service_ID) ON DELETE
 CREATE TABLE Room(
 Type CHAR(20),
 Size INTEGER NOT NULL,
-Community_Centre CHAR(20) NOT NULL,
+Community_Centre CHAR(50) NOT NULL,
 Is_Reserved Boolean,
 Room_ID INTEGER,
 ReservedBy INTEGER,
