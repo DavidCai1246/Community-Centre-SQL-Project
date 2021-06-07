@@ -65,7 +65,45 @@ VALUES (1, 779, 'Burger', '2021-03-01'),
 (5, 776, 'Burger', '2021-03-01'),
 (5, 775, 'Burger', '2021-03-01');
 
+INSERT INTO Room
+VALUES ('Weight Room',900,'Vancouver Community Centre',TRUE,101,13),
+('Studio Room 1',500,'Vancouver Community Centre',TRUE,102,11),
+('Offic',400,'Vancouver Community Centre',FALSE,103,NULL),
+('Studio Room 2',500,'Vancouver Community Centre',TRUE,201,13),
+('Gymnasium A',5000,'Vancouver Community Centre',TRUE,104,11),
+('Gymnasium B',5500,'Vancouver Community Centre',TRUE,105,13),
+('Multi Purpose Room',2000,'Vancouver Community Centre',TRUE,106,13);
 
+INSERT INTO Events
+VALUES ('2021-03-01',1001,101,13),
+('2021-03-01',1002,102,11),
+('2021-03-01',1003,201,13),
+('2021-03-01',1004,104,11),
+('2021-03-01',1005,105,13),
+('2021-03-01',1006,106,13);
+
+INSERT INTO Fitness_Classes
+VALUES (1001,"Chad"),
+(1002,"David"),
+(1003,"Kendra");
+
+INSERT INTO Intramural_League
+VALUES (1004,"Basketball"),
+(1005,"Volleyball");
+
+INSERT INTO Community_Outreach
+VALUES (1006,100);
+
+INSERT INTO Attends
+VALUES (1,1002),
+(2,1004),
+(3,1005),
+(4,1001),
+(5,1003),
+(5,1006);
+
+INSERT INTO Sponsor_Funds
+VALUES ("Bill Gatts",10000,1006);
 
 
 
