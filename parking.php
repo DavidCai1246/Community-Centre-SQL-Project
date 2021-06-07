@@ -14,9 +14,9 @@
     <li><a href="rooms.php">Rooms</a></li>
 </ul>
 
-<!-- THIS IS WHERE ALL OUR FUNCTIONALITY WILL GO, THIS IS OUR BODY-->
+<!-- THIS IS WHERE ALL OUR FUNCTIONALITY WILL GO, THIS IS OUR BODY -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
-    <h1>Parking Page</h1>
+    <h1>Query Parking</h1>
 </div>
 
 

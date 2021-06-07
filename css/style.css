@@ -28,13 +28,12 @@ ul {
   }
   
   li a:hover:not(.active) {
-    background-color: rgb(185, 255, 209);
+    background-color: rgba(98, 167, 68, 0.7);
   }
   
   
  /* this is for main table style, adapted from w3  */ 
   table {
-  font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
     }
@@ -45,5 +44,6 @@ td, th {
   padding: 8px;
 }
 
-tr:nth-child(even) {
+tr:first-child{
   background-color: #dddddd;
+}

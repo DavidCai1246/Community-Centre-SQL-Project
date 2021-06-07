@@ -14,9 +14,15 @@
     <li><a href="rooms.php">Rooms</a></li>
 </ul>
 
-<!-- THIS IS WHERE ALL OUR FUNCTIONALITY WILL GO, THIS IS OUR BODY-->
+<!-- THIS IS WHERE ALL OUR FUNCTIONALITY WILL GO, THIS IS OUR BODY -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
-    <h1>Community Centre Page</h1>
+    <h1>Query Community Centres</h1>
+</div>
+
+
+<!-- MAIN TABLE -->
+<div style="padding:20px;margin-top:30px;background-color:#ffffff;">
+    <h1>Community Centres</h1>
     
         <!-- THIS DISPLAYS THE TABLE ON LINK OPEN -->
     <?php
