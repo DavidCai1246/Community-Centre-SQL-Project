@@ -16,14 +16,14 @@
 
 <!-- THIS IS WHERE ALL OUR FUNCTIONALITY WILL GO, THIS IS OUR BODY-->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
-    <h1>Food Page</h1>
+    <h1>Community Centre Page</h1>
     
-    <!-- THIS DISPLAYS THE TABLE ON LINK OPEN -->
+        <!-- THIS DISPLAYS THE TABLE ON LINK OPEN -->
     <?php
         $servername = "localhost";
         $username = "root";
         $password = "root";
-        $dbname = "ZAGI";
+        $dbname = "community-centre";
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -32,19 +32,20 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT customerid, customername, customerzip FROM customer";
+        $sql = "SELECT Name, Location, Open_Time, Close_Time FROM Community_Centre";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             // output data of each row
             echo "<table> <tr>
-                    <th> id </th>
-                    <th> name </th>
-                    <th> zip </th>
+                    <th> Name </th>
+                    <th> Location </th>
+                    <th> Open Time </th>
+                    <th> Close Time </th>
                     </tr>";
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>". $row["customerid"]. "</td>". "<td>". $row["customername"]. "</td>". "<td>". $row["customerzip"]. "</td>";
+                echo "<td>". $row["Name"]. "</td>". "<td>". $row["Location"]. "</td>". "<td>". $row["Open_Time"]. "</td>" . "<td>". $row["Close_Time"]. "</td>";
                 echo "</tr>";
             }
             echo "</table>";
@@ -54,6 +55,7 @@
 
         $conn->close();
     ?>
+    
 </div>
 
 
