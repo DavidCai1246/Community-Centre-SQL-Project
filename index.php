@@ -17,6 +17,17 @@
 <!-- THIS IS WHERE ALL OUR FUNCTIONALITY WILL GO, THIS IS OUR BODY -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
     <h1>Query Community Centres</h1>
+    <br> </br>
+    <h1>Insert Values into DemoTable</h1>
+        <form method="POST" action="index.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+            <tr>
+                <td> Number: <input type="text" name="insNo"> </td>
+                <td> Name: <input type="text" name="insName"> </td>
+            </tr>
+            
+            <input type="submit" value="Insert" name="insertSubmit"></p>
+        </form>
 </div>
 
 
