@@ -21,11 +21,19 @@
     <h1>Insert Values into DemoTable</h1>
         <form method="POST" action="index.php"> <!--refresh page when submitted-->
             <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
-            <tr>
-                <td> Number: <input type="text" name="insNo"> </td>
-                <td> Name: <input type="text" name="insName"> </td>
+            <table><tr>
+                <td> Name </td>
+                <td> Location </td>
+                <td> Open Time </td>
+                <td> Close Time </td>
             </tr>
-            
+            <tr>
+                <td> <input type="text" name="insName"> </td>
+                <td> <input type="text" name="insLocation"> </td>
+                <td> <input type="text" name="insOpen"> </td>
+                <td> <input type="text" name="insClose"> </td>
+            </tr></table>
+
             <input type="submit" value="Insert" name="insertSubmit"></p>
         </form>
 </div>
