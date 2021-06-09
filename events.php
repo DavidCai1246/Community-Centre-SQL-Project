@@ -1,7 +1,33 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/style.css">
+<style>
+.collapsible {
+  background-color: rgba(98, 167, 68, 0.2);
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: rgba(98, 167, 68, 0.4);
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+</style>
 </head>
+<body>
 
 <!-- NAVBAR-->
 <ul>
@@ -14,11 +40,70 @@
     <li><a href="rooms.php">Rooms</a></li>
 </ul>
 
-<!-- THIS IS WHERE ALL OUR FUNCTIONALITY WILL GO, THIS IS OUR BODY-->
+<!-- THIS IS WHERE ALL OUR FUNCTIONALITY WILL BE VIEWED -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
-    <h1> Query Events </h1>
+
+    <button type="button" class="collapsible">Add Events</button>
+    <div class="content">
+        <form method="POST" action="events.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+            <table><tr>
+                <td> Date Of Event </td>
+                <td> Location </td>
+                <td> Room ID </td>
+                <td> Organizer ID </td>
+            </tr>
+            <tr>
+                <td> <input type="text" name="insName"> </td>
+                <td> <input type="text" name="insLocation"> </td>
+                <td> <input type="text" name="insRoomID"> </td>
+                <td> <input type="text" name="insOrganizerID"> </td>
+            </tr></table>
+
+            <input type="submit" value="submit" name="insertSubmit"></p>
+        </form> 
+    </div>
+
+    <br>
+
+    <button type="button" class="collapsible">Remove Events</button>
+    <div class="content">
+        <form method="POST" action="events.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+            <table><tr>
+                <td> Event ID </td>
+            </tr>
+            <tr>
+                <td> <input type="text" name="insName"> </td>
+            </tr></table>
+
+            <input type="submit" value="submit" name="insertSubmit"></p>
+        </form> 
+    </div>
+
 </div>
 
+
+<!-- THIS IS WHERE ALL OUR PHP SCRIPT WILL GO -->
+<?php
+
+$conn = Null;
+
+function connect() {
+    global $conn;
+    $servername = "localhost";
+    $username = "root";
+    $password = "root";
+    $dbname = "community-centre";
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+}
+
+?>
 
 <!-- MAIN TABLE -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
@@ -275,5 +360,22 @@
 </div>
 
 
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
 
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+</body>
 </html>
