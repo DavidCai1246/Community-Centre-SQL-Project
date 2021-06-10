@@ -54,7 +54,7 @@
     if (isset($_GET['AggregationQueryMember']) || isset($_GET['AggregationQueryCountMember'])) {
         $servername = "localhost";
         $username = "root";
-        $password = "000824";
+        $password = "root";
         $dbname = "community-centre";
 
         // Create connection
@@ -94,7 +94,7 @@
     <?php
         $servername = "localhost";
         $username = "root";
-        $password = "000824";
+        $password = "root";
         $dbname = "community-centre";
 
         // Create connection
@@ -175,7 +175,7 @@
     if (isset($_GET['AggregationQueryEmployee']) || isset($_GET['AggregationQueryCountEmployee'])) {
         $servername = "localhost";
         $username = "root";
-        $password = "000824";
+        $password = "root";
         $dbname = "community-centre";
 
         // Create connection
@@ -215,7 +215,7 @@
     <?php
         $servername = "localhost";
         $username = "root";
-        $password = "000824";
+        $password = "root";
         $dbname = "community-centre";
 
         // Create connection
