@@ -46,7 +46,7 @@
     <button type="button" class="collapsible">Add Events</button>
     <div class="content">
         <form method="POST" action="events.php"> <!--refresh page when submitted-->
-            <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+            <input type="hidden" id="insertEventQueryRequest" name="insertEventQueryRequest">
             <table><tr>
                 <td> Date Of Event </td>
                 <td> Event ID </td>
@@ -60,7 +60,61 @@
                 <td> <input type="text" name="insOrganizerID"> </td>
             </tr></table>
 
-            <input type="submit" value="insert" name="insertSubmit"></p>
+            <input type="submit" value="insert" name="insertEventSubmit"></p>
+        </form> 
+    </div>
+
+    <br>
+
+    <button type="button" class="collapsible">Add Event Type</button>
+    <div class="content">
+        <form method="POST" action="events.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="insertEventTypeQueryRequest" name="insertEventTypeQueryRequest">
+            <table><tr>
+                <td> Event Type </td>
+                <td> Event ID </td>
+                <td> Event Modifier </td>
+            </tr>
+            <tr>
+                <td> 
+                    <select name="insTypeEventType"> 
+                        <option value="Fitness_Classes">Fitness Class</option>
+                        <option value="Community_Outreach">Community Outreach</option>
+                        <option value="Intramural_League">Intramural League</option>
+                    </select>
+                </td>
+                <td> <input type="text" name="insTypeEventID"> </td>
+                <td> <input type="text" name="modifier"> </td>
+            </tr></table>
+
+            <input type="submit" value="insert" name="insertEventTypeSubmit"></p>
+        </form> 
+    </div>
+
+    <br>
+    
+    <button type="button" class="collapsible">Update Event</button>
+    <div class="content">
+        <form method="POST" action="events.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="updateEventQueryRequest" name="updateEventQueryRequest">
+            <table><tr>
+                <td> Column </td>
+                <td> Event ID </td>
+                <td> Modification </td>
+            </tr>
+            <tr>
+                <td> 
+                    <select name="updtColumn"> 
+                        <option value="Date_of_Event">Date Of Event</option>
+                        <option value="Room_ID">Room ID</option>
+                        <option value="Employee_ID">Employee ID</option>
+                    </select>
+                </td>
+                <td> <input type="text" name="updtEventID"> </td>
+                <td> <input type="text" name="updtMod"> </td>
+            </tr></table>
+
+            <input type="submit" value="update" name="updateEventSubmit"></p>
         </form> 
     </div>
 
@@ -69,7 +123,7 @@
     <button type="button" class="collapsible">Remove Events</button>
     <div class="content">
         <form method="POST" action="events.php"> <!--refresh page when submitted-->
-            <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
+            <input type="hidden" id="deleteQueryRequest" name="deleteQueryRequest">
             <table><tr>
                 <td> Event ID </td>
             </tr>
@@ -112,7 +166,7 @@
         mysqli_close($conn);
     }
 
-    function handleInsertRequest() {
+    function handleInsertEventRequest() {
         global $conn;
 
         $Date = $_POST['insDate'];
@@ -126,21 +180,58 @@
     }
 
     function handleDeleteRequest() {
-        // todo
+        global $conn;
+        
+        $EventID2 = $_POST['delEventID'];
+
+        $sql = "DELETE FROM Events WHERE Event_ID = '$EventID2'";
+
+        $conn->query($sql);
+    }
+
+    function handleInsertEventTypeRequest() {
+        global $conn;
+
+        $EventID = $_POST['insTypeEventID'];
+        $EventType = $_POST['insTypeEventType'];
+        $Modifier = $_POST['modifier'];
+
+        $sql = "INSERT INTO $EventType VALUES ('$EventID', '$Modifier')";
+        // echo $EventType . $EventID . "<br>" . $sql;
+
+        $conn->query($sql);
+    }
+
+    function handleUpdateEventQueryRequest() {
+        global $conn;
+
+        $Column = $_POST['updtColumn'];
+        $EventID = $_POST['updtEventID'];
+        $Modifier = $_POST['updtMod'];
+
+        $sql = "UPDATE Events SET $Column = '$Modifier' WHERE Event_ID = '$EventID'";
+
+        $conn->query($sql);
     }
 
     // big switch for post functions (insert, update, deletes)
     function handlePOSTRequest() {
         if (connect()) {
-            if (array_key_exists('insertQueryRequest', $_POST)) {
-                handleInsertRequest();
-            } else if (array_key_exists('insertDeleteRequest', $_POST)) {
+            if (array_key_exists('insertEventQueryRequest', $_POST)) {
+                handleInsertEventRequest();
+            } else if (array_key_exists('deleteQueryRequest', $_POST)) {
                 handleDeleteRequest();
+            } else if (array_key_exists('insertEventTypeQueryRequest', $_POST)) {
+                handleInsertEventTypeRequest();
+            } else if (array_key_exists('updateEventQueryRequest', $_POST)) {
+                handleUpdateEventQueryRequest();
             } 
         }
+        disconnect();
     }
 
-    if (isset($_POST['insertSubmit'])) {
+    if (isset($_POST['insertEventSubmit']) || isset($_POST['deleteSubmit']) || isset($_POST['insertEventTypeSubmit']) || 
+            isset($_POST['updateEventSubmit']) ) {
         handlePOSTRequest();
     }
 ?>
