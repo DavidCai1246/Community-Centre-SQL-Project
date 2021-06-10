@@ -49,18 +49,18 @@
             <input type="hidden" id="insertQueryRequest" name="insertQueryRequest">
             <table><tr>
                 <td> Date Of Event </td>
-                <td> Location </td>
+                <td> Event ID </td>
                 <td> Room ID </td>
                 <td> Organizer ID </td>
             </tr>
             <tr>
-                <td> <input type="text" name="insName"> </td>
-                <td> <input type="text" name="insLocation"> </td>
+                <td> <input type="date" name="insDate"> </td>
+                <td> <input type="text" name="insEventID"> </td>
                 <td> <input type="text" name="insRoomID"> </td>
                 <td> <input type="text" name="insOrganizerID"> </td>
             </tr></table>
 
-            <input type="submit" value="submit" name="insertSubmit"></p>
+            <input type="submit" value="insert" name="insertSubmit"></p>
         </form> 
     </div>
 
@@ -74,35 +74,75 @@
                 <td> Event ID </td>
             </tr>
             <tr>
-                <td> <input type="text" name="insName"> </td>
+                <td> <input type="text" name="delEventID"> </td>
             </tr></table>
 
-            <input type="submit" value="submit" name="insertSubmit"></p>
+            <input type="submit" value="delete" name="deleteSubmit"></p>
         </form> 
     </div>
 
 </div>
 
-
-<!-- THIS IS WHERE ALL OUR PHP SCRIPT WILL GO -->
+<!-- ******************************************** -->
+<!-- * THIS IS WHERE ALL OUR PHP SCRIPT WILL GO * -->
+<!-- ******************************************** -->
 <?php
 
-$conn = Null;
+    $conn = Null;
 
-function connect() {
-    global $conn;
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
-    $dbname = "community-centre";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    // creates a connection
+    function connect() {
+        global $conn;
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "community-centre";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            return false;
+            die("Connection failed: " . $conn->connect_error);
+        } else {return true;}
     }
-}
 
+    // closes the connection
+    function disconnect() {
+        global $conn;
+        mysqli_close($conn);
+    }
+
+    function handleInsertRequest() {
+        global $conn;
+
+        $Date = $_POST['insDate'];
+        $EventID = $_POST['insEventID'];
+        $RoomID = $_POST['insRoomID'];
+        $OrganizerID = $_POST['insOrganizerID'];
+
+        $sql = "INSERT INTO Events (Date_of_Event, Event_ID, Room_ID, Employee_ID) VALUES ('$Date', '$EventID',  '$RoomID', '$OrganizerID')";
+
+        $conn->query($sql);
+    }
+
+    function handleDeleteRequest() {
+        // todo
+    }
+
+    // big switch for post functions (insert, update, deletes)
+    function handlePOSTRequest() {
+        if (connect()) {
+            if (array_key_exists('insertQueryRequest', $_POST)) {
+                handleInsertRequest();
+            } else if (array_key_exists('insertDeleteRequest', $_POST)) {
+                handleDeleteRequest();
+            } 
+        }
+    }
+
+    if (isset($_POST['insertSubmit'])) {
+        handlePOSTRequest();
+    }
 ?>
 
 <!-- MAIN TABLE -->
@@ -129,7 +169,7 @@ function connect() {
             // output data of each row
             echo "<table> <tr>
                     <th> Date Of Event </th>
-                    <th> Location </th>
+                    <th> Event ID </th>
                     <th> Room ID </th>
                     <th> Organizer ID </th>
                     </tr>";
