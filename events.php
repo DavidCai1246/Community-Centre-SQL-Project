@@ -60,7 +60,7 @@
                 <td> <input type="text" name="insOrganizerID"> </td>
             </tr></table>
 
-            <input type="submit" value="insert" name="insertEventSubmit"></p>
+            <input type="submit" value="insert" name="postRequest"></p>
         </form> 
     </div>
 
@@ -87,7 +87,7 @@
                 <td> <input type="text" name="modifier"> </td>
             </tr></table>
 
-            <input type="submit" value="insert" name="insertEventTypeSubmit"></p>
+            <input type="submit" value="insert" name="postRequest"></p>
         </form> 
     </div>
 
@@ -114,7 +114,7 @@
                 <td> <input type="text" name="updtMod"> </td>
             </tr></table>
 
-            <input type="submit" value="update" name="updateEventSubmit"></p>
+            <input type="submit" value="update" name="postRequest"></p>
         </form> 
     </div>
 
@@ -131,7 +131,7 @@
                 <td> <input type="text" name="delEventID"> </td>
             </tr></table>
 
-            <input type="submit" value="delete" name="deleteSubmit"></p>
+            <input type="submit" value="delete" name="postRequest"></p>
         </form> 
     </div>
 
@@ -230,11 +230,11 @@
         disconnect();
     }
 
-    if (isset($_POST['insertEventSubmit']) || isset($_POST['deleteSubmit']) || isset($_POST['insertEventTypeSubmit']) || 
-            isset($_POST['updateEventSubmit']) ) {
+    if (isset($_POST['postRequest'])) {
         handlePOSTRequest();
     }
 ?>
+<!------------------------------------------------------------------------------------------------------------------------->
 
 <!-- MAIN TABLE -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
