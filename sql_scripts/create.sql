@@ -42,12 +42,13 @@ FOREIGN KEY (Parking_Num) REFERENCES Parking_Stall(Parking_Num) ON UPDATE CASCAD
 CREATE TABLE Employee(
 Employee_ID INTEGER,
 Salary INTEGER,
-Age INTEGER,
-Name CHAR(20),
+Age INTEGER not null,
+Name CHAR(20) not null,
+Type CHAR(20) not null,
 Address CHAR(30),
-Hours INTEGER,
+Hours INTEGER not null,
 Parking_Num INTEGER,
-Community_Centre CHAR(50),
+Community_Centre CHAR(50) not null,
 PRIMARY KEY (Employee_ID),
 FOREIGN KEY (Parking_Num) REFERENCES Parking_Stall(Parking_Num) ON DELETE CASCADE,
 FOREIGN KEY (Community_Centre) REFERENCES Community_Centre(Name) ON DELETE CASCADE

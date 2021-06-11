@@ -27,11 +27,11 @@ VALUES (1, 12, 'Timmy Member', 'Timmy Road', 889, null),
 (5, 32, 'Shimmy Member', 'Shimmy Road', null, 999);
 
 INSERT INTO Employee
-VALUES (11, 20, 23, 'Jeff Staff', 'Jeff Road', 40, 998, 'Vancouver Community Centre'),
-(12, 22, 25, 'Sam Contractor', 'Sam Road', 10, 997, 'Vancouver Community Centre'),
-(13, 25, 32, 'Sarah Staff', 'Sarah Road', 40, 996, 'Vancouver Community Centre'),
-(14, 0, 18, 'Ben Volunteer', 'Ben Road', 5, null, 'Vancouver Community Centre'),
-(15, 0, 18, 'Den Volunteer', 'Den Road', 3, null, 'Vancouver Community Centre');
+VALUES (11, 20, 23, 'Jeff Staff', 'Staff', 'Jeff Road', 40, 998, 'Vancouver Community Centre'),
+(12, 22, 25, 'Sam Contractor', 'Contractor', 'Sam Road', 10, 997, 'Vancouver Community Centre'),
+(13, 25, 32, 'Sarah Staff', 'Staff', 'Sarah Road', 40, 996, 'Vancouver Community Centre'),
+(14, 0, 18, 'Ben Volunteer', 'Volunteer', 'Ben Road', 5, null, 'Vancouver Community Centre'),
+(15, 0, 16, 'Den Volunteer', 'Volunteer', 'Den Road', 3, null, 'Vancouver Community Centre');
 
 INSERT INTO Volunteer
 VALUES (14, 'SFU'),

@@ -12,3 +12,4 @@ Changes we made so far:
 - change the char length for some attributes
 - Removed the Parks relationship from ERD as assigning a parking number is equivalent
 - Add attributes name, age, address to member
+- Add type attribute to employee table so that we can do Nested aggregation with group-by query easier
