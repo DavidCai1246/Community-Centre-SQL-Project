@@ -6,7 +6,7 @@
   background-color: rgba(98, 167, 68, 0.2);
   color: white;
   cursor: pointer;
-  padding: 18px;
+  padding: 10px;
   width: 100%;
   border: none;
   text-align: left;
@@ -19,12 +19,13 @@
 }
 
 .content {
-  padding: 0 18px;
+  padding: 0 10px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
 }
+
 </style>
 </head>
 <body>
@@ -39,103 +40,6 @@
     <li><a href="parking.php">Parking</a></li>
     <li><a href="rooms.php">Rooms</a></li>
 </ul>
-
-<!-- THIS IS WHERE ALL OUR FUNCTIONALITY WILL BE VIEWED -->
-<div style="padding:20px;margin-top:30px;background-color:#ffffff;">
-
-    <button type="button" class="collapsible">Add Events</button>
-    <div class="content">
-        <form method="POST" action="events.php"> <!--refresh page when submitted-->
-            <input type="hidden" id="insertEventQueryRequest" name="insertEventQueryRequest">
-            <table><tr>
-                <td> Date Of Event </td>
-                <td> Event ID </td>
-                <td> Room ID </td>
-                <td> Organizer ID </td>
-            </tr>
-            <tr>
-                <td> <input type="date" name="insDate"> </td>
-                <td> <input type="text" name="insEventID"> </td>
-                <td> <input type="text" name="insRoomID"> </td>
-                <td> <input type="text" name="insOrganizerID"> </td>
-            </tr></table>
-
-            <input type="submit" value="insert" name="postRequest"></p>
-        </form> 
-    </div>
-
-    <br>
-
-    <button type="button" class="collapsible">Add Event Type</button>
-    <div class="content">
-        <form method="POST" action="events.php"> <!--refresh page when submitted-->
-            <input type="hidden" id="insertEventTypeQueryRequest" name="insertEventTypeQueryRequest">
-            <table><tr>
-                <td> Event Type </td>
-                <td> Event ID </td>
-                <td> Event Modifier </td>
-            </tr>
-            <tr>
-                <td> 
-                    <select name="insTypeEventType"> 
-                        <option value="Fitness_Classes">Fitness Class</option>
-                        <option value="Community_Outreach">Community Outreach</option>
-                        <option value="Intramural_League">Intramural League</option>
-                    </select>
-                </td>
-                <td> <input type="text" name="insTypeEventID"> </td>
-                <td> <input type="text" name="modifier"> </td>
-            </tr></table>
-
-            <input type="submit" value="insert" name="postRequest"></p>
-        </form> 
-    </div>
-
-    <br>
-    
-    <button type="button" class="collapsible">Update Event</button>
-    <div class="content">
-        <form method="POST" action="events.php"> <!--refresh page when submitted-->
-            <input type="hidden" id="updateEventQueryRequest" name="updateEventQueryRequest">
-            <table><tr>
-                <td> Column </td>
-                <td> Event ID </td>
-                <td> Modification </td>
-            </tr>
-            <tr>
-                <td> 
-                    <select name="updtColumn"> 
-                        <option value="Date_of_Event">Date Of Event</option>
-                        <option value="Room_ID">Room ID</option>
-                        <option value="Employee_ID">Employee ID</option>
-                    </select>
-                </td>
-                <td> <input type="text" name="updtEventID"> </td>
-                <td> <input type="text" name="updtMod"> </td>
-            </tr></table>
-
-            <input type="submit" value="update" name="postRequest"></p>
-        </form> 
-    </div>
-
-    <br>
-
-    <button type="button" class="collapsible">Remove Events</button>
-    <div class="content">
-        <form method="POST" action="events.php"> <!--refresh page when submitted-->
-            <input type="hidden" id="deleteQueryRequest" name="deleteQueryRequest">
-            <table><tr>
-                <td> Event ID </td>
-            </tr>
-            <tr>
-                <td> <input type="text" name="delEventID"> </td>
-            </tr></table>
-
-            <input type="submit" value="delete" name="postRequest"></p>
-        </form> 
-    </div>
-
-</div>
 
 <!-- ******************************************** -->
 <!-- * THIS IS WHERE ALL OUR PHP SCRIPT WILL GO * -->
@@ -214,6 +118,19 @@
         $conn->query($sql);
     }
 
+    function handleInsertAttendeeRequest() {
+        global $conn;
+
+        $EventID = $_POST['eventID'];
+        $MemberID = $_POST['memberID'];
+
+
+        $sql = "INSERT INTO Attends VALUES ('$MemberID', '$EventID')";
+        // echo $EventType . $EventID . "<br>" . $sql;
+
+        $conn->query($sql);
+    }
+
     // big switch for post functions (insert, update, deletes)
     function handlePOSTRequest() {
         if (connect()) {
@@ -225,6 +142,8 @@
                 handleInsertEventTypeRequest();
             } else if (array_key_exists('updateEventQueryRequest', $_POST)) {
                 handleUpdateEventQueryRequest();
+            } else if (array_key_exists('insertAttendeeRequest', $_POST)) {
+                handleInsertAttendeeRequest();
             } 
         }
         disconnect();
@@ -238,8 +157,71 @@
 
 <!-- MAIN TABLE -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
-    <h1>All Events</h1>
 
+    <!--Adding Events -->
+    <button type="button" class="collapsible">Add Events</button>
+    <div class="content">
+        <form method="POST" action="events.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="insertEventQueryRequest" name="insertEventQueryRequest">
+            <table><tr>
+                <td> Date Of Event </td>
+                <td> Event ID </td>
+                <td> Room ID </td>
+                <td> Organizer ID </td>
+            </tr>
+            <tr>
+                <td> <input type="date" name="insDate"> </td>
+                <td> <input type="text" name="insEventID"> </td>
+                <td> <input type="text" name="insRoomID"> </td>
+                <td> <input type="text" name="insOrganizerID"> </td>
+            </tr></table>
+
+            <input type="submit" value="insert" name="postRequest"></p>
+        </form> 
+    </div>
+
+    <!--Updating Events -->
+    <button type="button" class="collapsible">Update Event</button>
+    <div class="content">
+        <form method="POST" action="events.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="updateEventQueryRequest" name="updateEventQueryRequest">
+            <table><tr>
+                <td> Column </td>
+                <td> Event ID </td>
+                <td> Modification </td>
+            </tr>
+            <tr>
+                <td> 
+                    <select name="updtColumn"> 
+                        <option value="Date_of_Event">Date Of Event</option>
+                        <option value="Room_ID">Room ID</option>
+                        <option value="Employee_ID">Employee ID</option>
+                    </select>
+                </td>
+                <td> <input type="text" name="updtEventID"> </td>
+                <td> <input type="text" name="updtMod"> </td>
+            </tr></table>
+
+            <input type="submit" value="update" name="postRequest"></p>
+        </form> 
+    </div>
+
+    <!--Removing Events -->
+    <button type="button" class="collapsible">Remove Events</button>
+    <div class="content">
+        <form method="POST" action="events.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="deleteQueryRequest" name="deleteQueryRequest">
+            <table><tr>
+                <td> Event ID </td>
+            </tr>
+            <tr>
+                <td> <input type="text" name="delEventID"> </td>
+            </tr></table>
+                <input type="submit" value="delete" name="postRequest"></p>
+        </form> 
+    </div>   
+
+    <h1>All Events</h1>
     <?php
         $servername = "localhost";
         $username = "root";
@@ -281,12 +263,37 @@
     ?>
 </div>
 
-<!-- SUB TABLES SHOWING THE EVENT TYPES -->
-
-<!-- Fitness Classes Sub Table -->
+<!-- EVENT TYPES -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
-    <h1>All Fitness Classes</h1>
 
+    <!--Adding Event Types -->
+    <button type="button" class="collapsible">Add Event Type</button>
+    <div class="content">
+        <form method="POST" action="events.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="insertEventTypeQueryRequest" name="insertEventTypeQueryRequest">
+            <table><tr>
+                <td> Event Type </td>
+                <td> Event ID </td>
+                <td> Event Modifier </td>
+            </tr>
+            <tr>
+                <td> 
+                    <select name="insTypeEventType"> 
+                        <option value="Fitness_Classes">Fitness Class</option>
+                        <option value="Community_Outreach">Community Outreach</option>
+                        <option value="Intramural_League">Intramural League</option>
+                    </select>
+                </td>
+                <td> <input type="text" name="insTypeEventID"> </td>
+                <td> <input type="text" name="modifier"> </td>
+            </tr></table>
+
+            <input type="submit" value="insert" name="postRequest"></p>
+        </form> 
+    </div>
+
+    <h1>All Fitness Classes</h1>
+    <!-- Fitness Classes Sub Table -->
     <?php
         $servername = "localhost";
         $username = "root";
@@ -322,12 +329,9 @@
 
         $conn->close();
     ?>
-</div>
 
-<!-- Community Outreach Sub Table -->
-<div style="padding:20px;margin-top:30px;background-color:#ffffff;">
     <h1>All Community Outreach Programs</h1>
-
+    <!-- Community Outreach Sub Table -->
     <?php
         $servername = "localhost";
         $username = "root";
@@ -363,12 +367,9 @@
 
         $conn->close();
     ?>
-</div>
 
-<!-- Intramural League Sub Table -->
-<div style="padding:20px;margin-top:30px;background-color:#ffffff;">
     <h1>All Intramural Leagues</h1>
-
+    <!-- Intramural League Sub Table -->
     <?php
         $servername = "localhost";
         $username = "root";
@@ -404,12 +405,31 @@
 
         $conn->close();
     ?>
+
 </div>
 
 <!-- Attends Table -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
-    <h1>Attendees</h1>
 
+    <!--Adding Attendance -->
+    <button type="button" class="collapsible">Add Attendees</button>
+    <div class="content">
+        <form method="POST" action="events.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="insertAttendeeRequest" name="insertAttendeeRequest">
+            <table><tr>
+                <td> Member ID </td>
+                <td> Event ID </td>
+            </tr>
+            <tr>
+                <td> <input type="text" name="memberID"> </td>
+                <td> <input type="text" name="eventID"> </td>
+            </tr></table>
+
+            <input type="submit" value="insert" name="postRequest"></p>
+        </form> 
+    </div>
+
+    <h1>Attendees</h1>
     <?php
         $servername = "localhost";
         $username = "root";
@@ -490,22 +510,23 @@
     ?>
 </div>
 
-
+<!-- JavaScript for sliding page expanding thing -->
+<!-- Taken/Adapted from w3schools as usual :^) -->
 <script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } 
-  });
-}
+    for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+        content.style.maxHeight = null;
+        } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        } 
+    });
+    }
 </script>
 
 </body>
