@@ -49,7 +49,7 @@
         }
 		
 		if (isset($_GET['DisplayFoodLogs'])) {
-			$sql = "SELECT f.Food_Service_Name, e.Employee_ID, e.Food, e.TimeAte FROM food_services f, eatsemployee e WHERE f.Food_Service_ID=e.Food_Service_ID";
+			$sql = "SELECT f.Food_Service_Name, e.Employee_ID, e.Food, e.TimeAte FROM Food_Services f, EatsEmployee e WHERE f.Food_Service_ID=e.Food_Service_ID";
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
             // output data of each row
@@ -73,7 +73,7 @@
 			}
 		}
 		
-		$sql = "SELECT f.Food_Service_Name, m.Membership_ID, m.Food, m.TimeAte FROM food_services f, eatsmembership m WHERE f.Food_Service_ID=m.Food_Service_ID;";
+		$sql = "SELECT f.Food_Service_Name, m.Membership_ID, m.Food, m.TimeAte FROM Food_Services f, EatsMembership m WHERE f.Food_Service_ID=m.Food_Service_ID;";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
