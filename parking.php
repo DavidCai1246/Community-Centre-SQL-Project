@@ -53,7 +53,7 @@
     <?php
         $servername = "localhost";
         $username = "root";
-        $password = "000824";
+        $password = "root";
         $dbname = "community-centre";
 
         // Create connection
