@@ -10,7 +10,19 @@ VALUES (999, 2.0, 'Regular', 'Vancouver Community Centre'),
 (998, 2.0, 'Regular', 'Vancouver Community Centre'),
 (997, 2.0, 'Regular', 'Vancouver Community Centre'),
 (996, 2.0, 'Regular', 'Vancouver Community Centre'),
-(995, 2.0, 'Accessible', 'Vancouver Community Centre');
+(995, 3.0, 'Accessible', 'Vancouver Community Centre'),
+(100, 3.0, 'Regular', 'Vancouver Community Centre'),
+(101, 3.0, 'Regular', 'Vancouver Community Centre'),
+(102, 3.0, 'Regular', 'Vancouver Community Centre'),
+(103, 3.0, 'Regular', 'Vancouver Community Centre'),
+(104, 3.0, 'Accessible', 'Vancouver Community Centre'),
+(450, 4.0, 'Regular', 'Vancouver Community Centre'),
+(451, 4.0, 'Regular', 'Vancouver Community Centre'),
+(452, 4.0, 'Regular', 'Vancouver Community Centre'),
+(453, 4.0, 'Regular', 'Vancouver Community Centre'),
+(454, 4.0, 'Accessible', 'Vancouver Community Centre'),
+(333, 0.5, 'Regular', 'Vancouver Community Centre'),
+(334, 0.5, 'Regular', 'Vancouver Community Centre');
 
 INSERT INTO Equipment
 VALUES (889, 'Vancouver Community Centre', 'Basketball', TRUE),
