@@ -21,10 +21,10 @@
 -->
 
 <!-- JOIN QUERY FOR FOODSERVICES -->
-<div style="padding-top:60px;background-color:#ffffff;">
+<div style="padding:20px;margin-top:30px;background-color:#ffffff;">
 <section>
 	<article>
-		<p align='left'>
+		<p align='center'>
 		<form method="GET" action="food.php" style ='text-alignt:center'>
 			<label for="calculate">Display food logs:</label>
 			<input type="submit" name="DisplayFoodLogs" value="Display">
@@ -243,6 +243,4 @@
     ?>
 </div>
 </html>
-
-
 
