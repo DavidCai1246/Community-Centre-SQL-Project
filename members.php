@@ -268,7 +268,7 @@
 <!-- Nested aggregation with group-by -->
 <div style="padding:20px;margin-top:30px;background-color:#ffffff;">
     <h1>Nested aggregation with group-by</h1>
-    <h1>Average Age per Employee Type</h1>
+    <h1>Oldest Employees by Employee Type</h1>
     
         <!-- THIS DISPLAYS THE TABLE ON LINK OPEN -->
     <?php
@@ -284,19 +284,33 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT Type, AVG(Age) as Average_Age from Employee GROUP BY Type;";
+        $sql = "SELECT Employee_ID, Salary, Age, Name, topAge.Type, Address, Hours, Parking_Num, Community_Centre FROM Employee INNER JOIN ( SELECT Type, MAX(Age) AS MAX_AGE FROM Employee GROUP BY Type) topAge ON Employee.Type = topAge.Type AND Employee.Age = topAge.MAX_AGE;";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             // output data of each row
             echo "<table> <tr>
-                    <th> Employee Type</th>
-                    <th> Average Age </th>
+                    <th> Employee ID </th>
+                    <th> Salary </th>
+                    <th> Age </th>
+                    <th> Name </th>
+                    <th> Type </th>
+                    <th> Address </th>
+                    <th> Hours </th>
+                    <th> Parking Num </th>
+                    <th> Community Centre </th>
                     </tr>";
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>". $row["Type"]. "</td>".
-                    "<td>". $row["Average_Age"]. "</td>";
+                echo "<td>". $row["Employee_ID"]. "</td>".
+                    "<td>". $row["Salary"]. "</td>".
+                    "<td>". $row["Age"]. "</td>".
+                    "<td>". $row["Name"]. "</td>".
+                    "<td>". $row["Type"]. "</td>".
+                    "<td>". $row["Address"]. "</td>".
+                    "<td>". $row["Hours"]. "</td>".
+                    "<td>". $row["Parking_Num"]. "</td>".
+                    "<td>". $row["Community_Centre"]. "</td>";
                 echo "</tr>";
             }
             echo "</table>";
