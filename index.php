@@ -27,7 +27,7 @@
     <img src="img/map.jpg" alt="map" width="600" height="400">
 </div>
 
-<!-- Aggregate Query for Membership -->
+<!-- Projection Query for Community_Centre table -->
 <div style="padding-top:60px;background-color:#ffffff;">
 
 <form action="index.php" method="get">
