@@ -1,0 +1,142 @@
+This is our list of all SQL queries that we have used in our project to fufill the requirements.
+Queries are listed in order to reflect marking rubric.
+
+
+==========================
+
+INSERT QUERIES
+
+Insert Event - Events Page:
+
+        $Date = $_POST['insDate'];
+        $EventID = $_POST['insEventID'];
+        $RoomID = $_POST['insRoomID'];
+        $OrganizerID = $_POST['insOrganizerID'];
+
+        $sql = "INSERT INTO Events (Date_of_Event, Event_ID, Room_ID, Employee_ID) VALUES ('$Date', '$EventID',  '$RoomID', '$OrganizerID')";
+
+
+Insert Event Type - Events Page:
+
+	$EventID = $_POST['insTypeEventID'];
+        $EventType = $_POST['insTypeEventType'];
+        $Modifier = $_POST['modifier'];
+
+        $sql = "INSERT INTO $EventType VALUES ('$EventID', '$Modifier')";
+
+
+Insert Attendee - Events Page:
+
+	$EventID = $_POST['eventID'];
+        $MemberID = $_POST['memberID'];
+
+        $sql = "INSERT INTO Attends VALUES ('$MemberID', '$EventID')";
+
+
+==========================
+
+DELETE QUERIES
+
+Delete Events - Events Page:
+
+	$EventID2 = $_POST['delEventID'];
+
+        $sql = "DELETE FROM Events WHERE Event_ID = '$EventID2'";
+
+
+==========================
+
+UPDATE QUERIES
+
+Update Event - Events Page:
+
+	$Column = $_POST['updtColumn'];
+        $EventID = $_POST['updtEventID'];
+        $Modifier = $_POST['updtMod'];
+
+        $sql = "UPDATE Events SET $Column = '$Modifier' WHERE Event_ID = '$EventID'";
+
+
+==========================
+
+SELECTION QUERIES
+
+Select parking with filter - Parking page:
+
+	$attribute = $_GET['attribute'];
+        $operation = $_GET['operation'];
+        $number = $_GET['restraint'];
+
+        $sql = "SELECT * FROM Parking_Stall WHERE $attribute $operation $number";
+
+
+==========================
+
+PROJECTION QUERIES
+
+Project Community Centre Attributes - Community Centre Page (index.php):
+
+	$sql = "SELECT $attributes FROM Community_Centre";
+
+
+==========================
+
+JOIN QUERIES
+
+Join Food Services & Employee Eats tables - Food Page:
+
+	$sql = "SELECT f.Food_Service_Name, e.Employee_ID, e.Food, e.TimeAte FROM Food_Services f, EatsEmployee e WHERE f.Food_Service_ID=e.Food_Service_ID";
+
+
+Join Food Services & Member Eats tables - Food Page:
+
+	$sql = "SELECT f.Food_Service_Name, m.Membership_ID, m.Food, m.TimeAte FROM Food_Services f, EatsMembership m WHERE f.Food_Service_ID=m.Food_Service_ID;";
+
+
+==========================
+
+AGGREGATION QUERIES
+
+Aggregate functions for Members - Member Page:
+
+	$attribute = $_GET['attribute'];
+        $operation = $_GET['operation'];
+
+        $sql = "SELECT $operation($attribute) as ret FROM Memberships";
+
+
+Aggregate count function for Members - Member Page:
+
+	$sql = "SELECT COUNT(*) as count FROM Memberships";
+
+
+Aggregate functions for Employees - Member Page:
+
+	$attribute = $_GET['attribute'];
+        $operation = $_GET['operation'];
+
+        $sql = "SELECT $operation($attribute) as ret FROM Employee";
+
+
+Aggregate count function for Employees - Member Page:
+
+	$sql = "SELECT COUNT(*) as count FROM Employee";
+
+
+==========================
+
+NESTED AGGREGATION QUERIES WITH GROUP-BY:
+
+	Nested Aggregate Query for Employees - Member Page:
+
+	$sql = "SELECT Employee_ID, Salary, Age, Name, topAge.Type, Address, Hours, Parking_Num, Community_Centre FROM Employee INNER JOIN 
+	       ( SELECT Type, MAX(Age) AS MAX_AGE FROM Employee GROUP BY Type) topAge ON Employee.Type = topAge.Type AND Employee.Age = topAge.MAX_AGE;";
+
+
+==========================
+
+DIVISION QUERIES:
+
+TO BE ADDED
+
+
