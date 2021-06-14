@@ -80,7 +80,7 @@ VALUES (1, 779, 'Burger', '2021-03-01'),
 INSERT INTO Room
 VALUES ('Weight Room',900,'Vancouver Community Centre',TRUE,101,13),
 ('Studio Room 1',500,'Vancouver Community Centre',TRUE,102,11),
-('Offic',400,'Vancouver Community Centre',FALSE,103,NULL),
+('Office',400,'Vancouver Community Centre',FALSE,103,NULL),
 ('Studio Room 2',500,'Vancouver Community Centre',TRUE,201,13),
 ('Gymnasium A',5000,'Vancouver Community Centre',TRUE,104,11),
 ('Gymnasium B',5500,'Vancouver Community Centre',TRUE,105,13),
