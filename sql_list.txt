@@ -125,7 +125,7 @@ Aggregate count function for Employees - Member Page:
 
 ==========================
 
-NESTED AGGREGATION QUERIES WITH GROUP-BY:
+NESTED AGGREGATION QUERIES WITH GROUP-BY
 
 	Nested Aggregate Query for Employees - Member Page:
 
@@ -135,8 +135,17 @@ NESTED AGGREGATION QUERIES WITH GROUP-BY:
 
 ==========================
 
-DIVISION QUERIES:
+DIVISION QUERIES
 
-TO BE ADDED
+	Division Query for Rooms - Rooms Page:
 
+	$sql = "SELECT e.Name, e.Employee_ID FROM Employee e
+                        WHERE NOT EXISTS (SELECT * FROM Room r WHERE NOT EXISTS (
+                            SELECT q.ReservedBy FROM Room q 
+                                WHERE q.ReservedBy = Employee_ID AND q.Room_ID = r.Room_ID))";
+
+
+==========================
+
+END OF TXT FILE
 
